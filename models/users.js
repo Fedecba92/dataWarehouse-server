@@ -84,12 +84,7 @@ users.init( {
             len:{
                 args:[3,255],
                 msg:'the password lenght has to be between 3 and 255 characters'
-            },
-            isAlphanumeric:{
-                args:true,
-                msg:'password must contain only letters or numbers'
-            },
-            
+            }
         
         }
     },
