@@ -44,13 +44,15 @@ const userCreate = async (req, res = response) => {
 //controlador para login
 const userLogin = async (req, res = response) => {
   const { username, password } = req.body;
-
+  console.log(username, password);
   try {
-    const user = await users.findAll({
+    const user  = await users.findOne({
       where: {
         username,
       },
     });
+
+
     if (!user) {
       return res.status(400).json({
         ok: false,
@@ -59,7 +61,7 @@ const userLogin = async (req, res = response) => {
     }
 
     //confirma si el password hace match
-    const validPassword = bcrypt.compareSync( password, user.password );
+    const validPassword = bcrypt.compareSync( password, user.dataValues.password );
 
     if( !validPassword){
         return res.status(400).json({
@@ -69,7 +71,7 @@ const userLogin = async (req, res = response) => {
     }
 
     //Generar el JWT
-    const token = await tokenGenerator(user.id, user.name);
+    const token = await tokenGenerator(user.dataValues.id, user.dataValues.name);
 
     return res.status(200).json({
       ok: true,
@@ -93,4 +95,5 @@ const userLogin = async (req, res = response) => {
 
 module.exports = {
   userCreate,
+  userLogin
 };

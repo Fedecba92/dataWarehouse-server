@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 
 const { fieldValidator } = require('../middlewares/fields-validators');
-const { userCreate } = require('../controllers/auth.controller');
+const { userCreate, userLogin } = require('../controllers/auth.controller');
 
 const router = Router();
 
@@ -15,7 +15,7 @@ router.post('/new',[
 
 
 //login de usuario
-router.post('/login',)
+router.post('/login', userLogin)
 
 
 //validar y revalidar el token
