@@ -6,21 +6,21 @@ const { tokenGenerator } = require("../helpers/jwt");
 
 //controllador para crear un usuario
 const userCreate = async (req, res = response) => {
-  const { username, name, phone, email, password } = req.body;
+  const { username, name, phone, email, password,roleId } = req.body;
 
   try {
     //encripta la contraseña con hash
     const salt = bcrypt.genSaltSync();
     passwordCrypt = bcrypt.hashSync(password, salt);
 
-    console.log("here", users);
+    console.log("here", req.body);
     const created = await users.create({
       username,
       name,
       phone,
       email,
       password: passwordCrypt,
-      roleId: "1",
+      roleId
     });
 
     //Generar el JWT
@@ -71,7 +71,7 @@ const userLogin = async (req, res = response) => {
     }
 
     //Generar el JWT
-    const token = await tokenGenerator(user.dataValues.id, user.dataValues.name);
+    const token = await tokenGenerator(user.dataValues.roleId, user.dataValues.name);
 
     return res.status(200).json({
       ok: true,
@@ -88,6 +88,25 @@ const userLogin = async (req, res = response) => {
   }
 };
 
+const getUsers = async (req, res = response) => {
+  try { 
+
+    const results = await users.findAll();
+      return res.status(200).json({
+        ok:true,
+        data: results
+      })
+
+  } catch (error) {
+    
+    return res.status(500).json({
+      ok:false,
+      error
+    })
+
+  }
+
+}
 
 
 //controlador para revalidar o renovar token
@@ -95,5 +114,6 @@ const userLogin = async (req, res = response) => {
 
 module.exports = {
   userCreate,
-  userLogin
+  userLogin,
+  getUsers
 };

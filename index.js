@@ -18,6 +18,7 @@ app.use( cors() );
 
 //inicializando la ruta raiz
 app.use( '/api/auth', require('./routes/auth.route') );
+app.use( '/api/countries', require('./routes/countries.route') );
 
 app.listen( 3000, () => {
     console.log(`Servidor corriendo en el puerto ${ 3000 }`);
