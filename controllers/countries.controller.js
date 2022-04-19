@@ -5,6 +5,29 @@ const countries = require("../models/countries");
 
 //TODO: crear un getRegions   [Africa, Oceanía, Americas, Asia]
 //TODO: crear un getCities 
+//TODO: crear paises: regionId
+
+const createRegion = async ( req, res = response ) =>{
+
+    try {
+
+        const { name } = req.body;
+        const newRegion = await regions.create({
+            name
+        });
+        
+        return res.status(200).json({
+            ok:true,
+            newRegion
+        });
+        
+    } catch (error) {
+        return res.status(500).json({
+            ok: false,
+            error
+        });
+    }
+}
 
 
 const getRegions = async (req, res=response) => {
@@ -98,7 +121,8 @@ const getCountries = async (req, res = response) => {
 
 
 module.exports = {
+    createRegion,
     getCountries,
-    getRegions
+    getRegions,
 };
   

@@ -6,7 +6,7 @@ const { tokenGenerator } = require("../helpers/jwt");
 
 //controllador para crear un usuario
 const userCreate = async (req, res = response) => {
-  const { username, name, phone, email, password,roleId } = req.body;
+  const { username, name, phone, email, password, roleId } = req.body;
 
   try {
     //encripta la contraseña con hash

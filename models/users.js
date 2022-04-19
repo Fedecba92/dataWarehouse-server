@@ -116,11 +116,7 @@ users.init( {
             msg: 'The email is already taken!'
          }
     },
-    roleId:{
-        type: DataTypes.INTEGER,
-        allowNull:false,
-        defaultValue:2
-    }
+    
 },
 {
     sequelize:sequelize.connection,
