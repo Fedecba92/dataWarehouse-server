@@ -15,12 +15,8 @@ cities.init( {
             },
             notNull:{
                 msg:'The field can not be null'
-            },
-            isAlpha:{
-                args:true,
-                msg:'name must only contain letters'
-        
-            },
+            }
+            
             
         }
     },

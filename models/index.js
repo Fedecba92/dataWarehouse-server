@@ -21,7 +21,6 @@ cities.belongsTo(countries);
 //USERS
 users.belongsTo(role,{
     foreignKey:'roleId',
-    
 });
 
 

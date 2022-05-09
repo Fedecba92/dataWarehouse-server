@@ -2,6 +2,7 @@ const { response } = require("express"); //opcional
 const bcrypt = require("bcryptjs");
 
 const users = require("../models/users");
+const roles = require("../models/role");
 const { tokenGenerator } = require("../helpers/jwt");
 
 //controllador para crear un usuario
@@ -108,6 +109,31 @@ const getUsers = async (req, res = response) => {
 
 }
 
+const addRole = async (req, res = response) => {
+
+  try {
+
+    const newRole = await roles.create({
+      name:req.body.name
+    });
+
+    return res.status(200).json({
+      ok: true,
+      msg: "Nuevo rol creado correctamente",
+      newRole
+    });
+
+
+
+  } catch (error) {
+    return res.status(500).json({
+      ok:false,
+      error
+    })
+  }
+
+}
+
 
 //controlador para revalidar o renovar token
 
@@ -115,5 +141,6 @@ const getUsers = async (req, res = response) => {
 module.exports = {
   userCreate,
   userLogin,
-  getUsers
+  getUsers,
+  addRole
 };

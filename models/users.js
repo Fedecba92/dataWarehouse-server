@@ -115,8 +115,7 @@ users.init( {
             name: 'email',
             msg: 'The email is already taken!'
          }
-    },
-    
+    }
 },
 {
     sequelize:sequelize.connection,
